@@ -1,60 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:router_demo/providers/user_data_provider.dart';
 
-class ProfileInfoPage extends StatelessWidget {
+class ProfileInfoPage extends ConsumerWidget {
   const ProfileInfoPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final String name = 'Karim Bhai';
-    final String email = 'karim@example.com';
-    final int age = 28;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userData = ref.watch(userDataProvider);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Customer Summary',
+          style: TextStyle(fontFamily: 'poppins'),
+        ),
+        backgroundColor: Color.fromARGB(255, 37, 40, 134),
+        titleTextStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        centerTitle: true,
+      ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Profile Picture
+        // This is the key: it centers the entire Column vertically and horizontally
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (userData.profilePicture != null)
               CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage('assets/pp.jpg'),
+                backgroundImage: FileImage(userData.profilePicture!),
               ),
-              const SizedBox(height: 22),
-
-              // Title
-              const Text(
-                'Personal Information',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              _infoLine('Name', name),
-              _infoLine('Email', email),
-              _infoLine('Age', '$age'),
-            ],
-          ),
+            SizedBox(height: 20),
+            Text('Name: ${userData.name}', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 8),
+            Text('Email: ${userData.email}', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 8),
+            Text('Age: ${userData.age}', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 8),
+            Text('Selected Services:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ...userData.selectedServices.map(
+              (s) => Text('- $s', style: TextStyle(fontSize: 16)),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-
-  Widget _infoLine(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$label: ',
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text(value),
-        ],
       ),
     );
   }

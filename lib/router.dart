@@ -27,7 +27,7 @@ final router = GoRouter(
         GoRoute(
           path: '/services',
           parentNavigatorKey: _shellNavigatorKey,
-          builder: (context, state) => const ServicePage(),
+          builder: (context, state) => ServicePage(),
         ),
         GoRoute(
           path: '/profile',
@@ -37,7 +37,7 @@ final router = GoRouter(
             GoRoute(
               path: 'login',
               parentNavigatorKey: _shellNavigatorKey,
-              builder: (context, state) => const ProfileInfoPage(),
+              builder: (context, state) => ProfileInfoPage(),
             ),
           ],
         ),
