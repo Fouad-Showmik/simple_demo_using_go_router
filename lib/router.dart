@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:router_demo/bottom_navigation.dart';
 import 'package:router_demo/pages/home_page.dart';
-import 'package:router_demo/pages/chat_page.dart';
+import 'package:router_demo/pages/service_page.dart';
 import 'package:router_demo/pages/profile_page.dart';
 import 'package:router_demo/pages/information_page.dart';
 
@@ -25,9 +25,9 @@ final router = GoRouter(
           builder: (context, state) => const HomePage(),
         ),
         GoRoute(
-          path: '/chat',
+          path: '/services',
           parentNavigatorKey: _shellNavigatorKey,
-          builder: (context, state) => const ChatPage(),
+          builder: (context, state) => const ServicePage(),
         ),
         GoRoute(
           path: '/profile',
