@@ -24,7 +24,7 @@ class _BottomNavigationBarScaffoldState
         context.go('/');
         break;
       case 1:
-        context.go('/chat');
+        context.go('/services');
         break;
       case 2:
         context.go('/profile');
@@ -44,7 +44,7 @@ class _BottomNavigationBarScaffoldState
         unselectedItemColor: Colors.white54,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Services'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
